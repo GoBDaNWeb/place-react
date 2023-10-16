@@ -1,0 +1,105 @@
+@import 'shared/styles/vars'
+    
+.section
+    height: 100vh
+    background: var(--surface-secondary-color)
+    width: 100%
+    display: grid
+    grid-template-columns: 30% 60%
+    align-items: center
+    justify-content: space-between
+    padding: 150px 48px 48px
+    box-sizing: border-box
+    @media(max-width: $tab)
+        display: flex
+        flex-direction: column
+        padding: 1.5rem 1rem
+    .content
+        z-index: 2
+        display: grid
+        grid-template-rows: repeat(2,1fr)
+        height: 100%
+        .top
+            display: flex
+            flex-direction: column
+            justify-content: space-between
+            padding-bottom: 1.5rem
+            .title
+                font-family: Cera Pro, sans-serif
+                font-size: 40px
+                font-style: normal
+                font-weight: 400
+                line-height: 100%
+                letter-spacing: -2px 
+                color: var(--text-primary-color)
+            p
+                color: var(--text-primary-color)
+                font-family: Cera Pro, sans-serif
+                font-size: 16px
+                font-style: normal
+                font-weight: 400
+                line-height: 100%
+                letter-spacing: -0.8px 
+        .bottom
+            display: flex
+            align-items: flex-end
+            border-top: 1px solid rgba(220, 197, 183, 0.20)
+            position: relative
+            .title
+                text-transform: uppercase
+                top: 48px
+                position: absolute
+                white-space: nowrap
+                font-family: Cera Pro, sans-serif
+                font-size: 96px
+                font-style: normal
+                font-weight: 400
+                line-height: 100%
+                letter-spacing: -2px 
+                color: var(--text-primary-color)
+                @media(max-width: $tab)
+                    display: none
+            .btns
+                display: flex
+                flex-direction: column
+                gap: 1rem
+                width: 100%
+                .btn
+                    height: 54px
+                    font-size: 16px
+           
+    .food
+        background-image: url('../../images/barmanBg.jpg')
+        background-repeat: no-repeat
+        background-size: cover
+        display: flex
+        align-items: center
+        justify-content: center
+        height: 100%
+        position: relative
+        @media(max-width: $tab)
+            width: 100%
+            margin-top: 1rem
+        img
+            position: absolute
+            height: 100%
+            clip-path: ellipse(40% 45% at 50% 50%)
+            cursor: pointer
+            &:hover
+                & ~ .btn
+                    background: var(--surface-primary-color)
+                    border-color: var(--surface-primary-color)
+                    svg
+                        path
+                            fill: var(--text-primary-color)
+        .btn
+            position: absolute
+            top: 0
+            bottom: 0
+            left: 0
+            right: 0
+            margin: auto
+            height: 55px
+            width: 55px
+            padding: 0
+            pointer-events: none

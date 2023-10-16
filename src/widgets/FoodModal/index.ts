@@ -1,0 +1,1 @@
+export { FoodModal } from "./ui";

@@ -1,0 +1,36 @@
+@import 'shared/styles/vars'
+    
+.header.isInView
+    transform: translateY(0)
+    opacity: 1
+.header.dark
+    border-color: var(--surface-primary-color)
+.header
+    display: flex
+    align-items: center
+    justify-content: space-between
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    z-index: 100
+    padding-top: 1.9rem 
+    padding-bottom: 1.9rem 
+    background:  rgba(220, 197, 183, 0.05)
+    border-bottom: 1px solid rgba(220, 197, 183, 0.20)
+    backdrop-filter: blur(62px)
+    transform: translateY(-100%)
+    opacity: 0
+    transition: transform var(--trs-1000) 2400ms, border-color var(--trs-1000)
+    @media(max-width: $tab)
+        padding-top: 1rem
+        padding-bottom: 1rem
+    .LogoWrapper
+        cursor: pointer
+    .darkBtn
+        background: var(--surface-primary-color)
+        color: var(--text-primary-color)
+        border-color:  var(--surface-primary-color)
+        svg
+            path
+                fill: var(--text-primary-color)

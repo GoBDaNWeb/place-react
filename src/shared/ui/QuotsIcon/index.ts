@@ -1,0 +1,1 @@
+export { QuotsIcon } from "./QuotsIcon";

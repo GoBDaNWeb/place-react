@@ -1,0 +1,224 @@
+
+.button.rounded.secondaryInvarion
+    border: none
+.button.secondaryInvarion
+    background: none
+    color: var(--text-primary-color)
+    border-radius: var(--rounded-xl)
+    border: 1px solid var(--surface-quaternary-color)
+    position: relative
+    overflow: hidden
+    span
+        z-index: 1
+    svg
+        path
+            
+            fill: var(--text-primary-color)
+    &:after
+        position: absolute
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+        content: ''
+        transform: translateY(100%)
+        background: none
+        transition: var(--trs-500)
+        box-shadow: 0px -54px 0px 0px var(--surface-quaternary-color) inset
+    &:hover
+        color: var(--text-secondary-color)
+        svg
+            path
+                
+                fill: var(--text-secondary-color)
+        &:after
+            transform: translateY(0)
+
+.button.primaryInvarion
+    background: var(--surface-primary-color)
+    color: var(--text-primary-color)
+    border-radius: var(--rounded-xl)
+    svg
+        path
+            
+            fill: var(--text-primary-color)
+    &:hover
+        background: none
+        color:var(--text-secondary-color)
+        svg
+            path
+                
+                fill: var(--text-secondary-color)
+.button.secondary
+    background: none
+    color: var(--text-secondary-color)
+    border-radius: var(--rounded-xl)
+    border: 1px solid var(--surface-primary-color)
+    position: relative
+    overflow: hidden
+    span
+        transition: var(--trs-500)
+        z-index: 1
+    svg
+        path
+            
+            fill: var(--text-secondary-color)
+    &:after
+        position: absolute
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+        content: ''
+        transform: translateY(100%)
+        background: none
+        transition: var(--trs-500)
+        box-shadow: 0px -54px 0px 0px var(--surface-primary-color) inset
+    &:hover
+        span
+            color: var(--text-primary-color)
+        svg
+            path
+                fill: var(--text-primary-color)
+        &:after
+            transform: translateY(0)
+.button.primary
+    background: var(--surface-quaternary-color)
+    color: var(--text-secondary-color)
+    border-radius: var(--rounded-xl)
+    svg
+        path
+            
+            fill: var(--text-secondary-color)
+    &:hover
+        background: var(--surface-primary-color)
+        color: var(--text-primary-color)
+        svg
+            path
+                
+                fill: var(--text-primary-color)
+.button.rounded.secondaryInvarion
+    min-width: 54px
+    min-height: 54px
+    max-width: 54px
+    max-height: 54px
+    padding: 0
+    border-radius: var(--rounded-full)
+    justify-content: center
+    background: none
+    position: relative
+    svg
+        z-index: 1
+        path
+            
+            fill: var(--text-primary-color)
+    &:after
+        position: absolute
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+        content: ''
+        border-radius: 50%
+        transform: translate(0)
+        background: none
+        box-shadow: 0px 0px 0px 1px var(--surface-quaternary-color) inset
+        transition: var(--trs-500)
+    &:hover
+        background: none
+        svg
+            path
+                
+                fill: var(--text-secondary-color)
+        &:after
+            box-shadow: 0px 0px 0px 54px var(--surface-quaternary-color) inset
+            
+.button.rounded.primaryInvarion
+    min-width: 54px
+    min-height: 54px
+    max-width: 54px
+    max-height: 54px
+    padding: 0
+    border-radius: var(--rounded-full)
+    justify-content: center
+    background: none
+    position: relative
+    svg
+        z-index: 1
+        path
+            
+            fill: var(--text-primary-color)
+    &:after
+        position: absolute
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+        content: ''
+        border-radius: 50%
+        transform: translate(0)
+        background: none
+        box-shadow: 0px 0px 0px 54px var(--surface-primary-color) inset
+        transition: var(--trs-500)
+    &:hover
+        background: none
+        svg
+            path
+                
+                fill: var(--text-secondary-color)
+        &:after
+            box-shadow: 0px 0px 0px 1px var(--surface-primary-color) inset
+.button.rounded.primary
+    width: 54px
+    height: 54px
+    padding: 0
+    border-radius: var(--rounded-full)
+    justify-content: center
+    background: none
+    position: relative
+    svg
+        z-index: 1
+        path
+            
+            fill: var(--text-secondary-color)
+    &:after
+        position: absolute
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+        content: ''
+        border-radius: 50%
+        transform: translate(0)
+        background: none
+        box-shadow: 0px 0px 0px 54px var(--surface-quaternary-color) inset
+        transition: var(--trs-500)
+    &:hover
+        background: none
+        svg
+            path
+                
+                fill: var(--text-primary-color)
+        &:after
+            box-shadow: 0px 0px 0px 1px var(--surface-quaternary-color) inset
+.button
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 4px
+    color: var(--white-color)
+    font-size: 1rem
+    padding: .4rem 1rem
+    text-align: center
+    transition: all var(--trs-500)
+    cursor: pointer
+    border: none
+    span
+        font-family: Cera Pro, sans-serif
+        display: flex
+        align-items: center
+        justify-content: center
+        gap: 4px
+    svg
+        path
+            transition: all var(--trs-500)
