@@ -1,32 +1,45 @@
+import Afisha from "shared/assets/images/menu/Afisha.jpg";
+import Coctail from "shared/assets/images/menu/Coctail.jpg";
+import Concept from "shared/assets/images/menu/Concept.jpg";
+import Contacts from "shared/assets/images/menu/Contacts.jpg";
+import Interier from "shared/assets/images/menu/Interier.jpg";
+import Kitchen from "shared/assets/images/menu/Kitchen.jpg";
+
 export const menuList = [
   {
     title: "Концепция",
-    img: "/images/menu/Concept.jpg",
-    slideTo: 1,
+    img: Concept,
+    slideTo: 2,
+    scroll: "#concept",
   },
   {
     title: "Афиша",
-    img: "/images/menu/Afisha.jpg",
-    slideTo: 4,
+    img: Afisha,
+    slideTo: 5,
+    scroll: "#afisha",
   },
   {
     title: "Коктейльная карта",
-    img: "/images/menu/Coctail.jpg",
-    slideTo: 6,
+    img: Coctail,
+    slideTo: 7,
+    scroll: "#coctail",
   },
   {
     title: "кухня",
-    img: "/images/menu/Kitchen.jpg",
-    slideTo: 8,
+    img: Kitchen,
+    slideTo: 9,
+    scroll: "#kitchen",
   },
   {
     title: "Интерьер",
-    img: "/images/menu/Interier.jpg",
-    slideTo: 10,
+    img: Interier,
+    slideTo: 11,
+    scroll: "#interior",
   },
   {
     title: "Контакты",
-    img: "/images/menu/Contacts.jpg",
+    img: Contacts,
     slideTo: 12,
+    scroll: "#contacts",
   },
 ];

@@ -52,9 +52,223 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>PLACE bar</title>
+    <style>
+      .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10001;
+        width: 100%;
+        height: 100%;
+        background: #dcc5b7;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 3rem;
+        box-sizing: border-box;
+        transition: opacity 0.2s linear, visibility 0.2s linear;
+      }
+
+      .loader__letters {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .loader__letter {
+        margin-right: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: auto;
+        height: 100%;
+        /* min-height: 180px;
+        max-width: 157px; */
+        /* transform: translateY(-20px); */
+        opacity: 0;
+        transition: transform 0.2s ease-in, opacity 0.2s ease-in;
+      }
+
+      .loader__letter.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .loader__letter svg {
+        /* min-height: 180px;
+        max-width: 157px; */
+        fill: #402020;
+      }
+      @media (max-width: 1024px) {
+        .loader__letter svg {
+          /* min-height: 180px;
+        max-width: 157px; */
+          width: 100%;
+        }
+        .loader {
+          padding: 1rem;
+        }
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="loader" class="loader">
+      <div class="loader__letters">
+        <div class="loader__letter active">
+          <svg
+            width="99"
+            height="180"
+            viewBox="0 0 99 180"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M66.5785 66.5977C65.2041 70.0285 63.0643 73.0283 60.1515 75.5998C57.236 78.17 53.5096 80.2258 48.9698 81.77C44.4273 83.3116 38.9855 84.0863 32.6469 84.0863H30.8469V28.2835H31.6187C38.1291 28.2835 43.7414 29.0166 48.4557 30.4683C53.1673 31.9304 57.0225 33.942 60.0239 36.5135C63.0188 39.085 65.2041 42.0405 66.5785 45.3854C67.9478 48.7276 68.635 52.2873 68.635 56.0554C68.635 59.6554 67.9478 63.1734 66.5785 66.5977ZM82.9014 17.2256C77.6717 12.0839 71.078 7.92793 63.1086 4.75623C55.1392 1.58454 45.8408 0 35.2162 0H0V180H30.8469V113.657C42.1587 113.657 52.0545 111.984 60.5367 108.642C69.0203 105.3 76.0903 100.843 81.7443 95.2692C87.3995 89.7018 91.6413 83.4014 94.4683 76.3693C97.2953 69.3436 98.7101 62.2269 98.7101 55.0281C98.7101 48.173 97.3812 41.4429 94.726 34.8391C92.0669 28.2432 88.1271 22.3711 82.9014 17.2256Z"
+            />
+          </svg>
+        </div>
+        <div class="loader__letter">
+          <svg
+            width="109"
+            height="180"
+            viewBox="0 0 109 180"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M31.0421 150.172V0H0.138672V180H108.042L100.316 150.172H31.0421Z"
+            />
+          </svg>
+        </div>
+        <div class="loader__letter">
+          <svg
+            width="152"
+            height="180"
+            viewBox="0 0 152 180"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M57.0268 120.085L75.9558 72.5135L94.8821 120.085H57.0268ZM72.3476 0L24.3946 120.085H2.78765V148.886H12.8946L0.470947 180H33.1879L45.5672 148.886H106.342L118.721 180H151.439L79.5613 0H72.3476Z"
+            />
+          </svg>
+        </div>
+        <div class="loader__letter">
+          <svg
+            width="159"
+            height="180"
+            viewBox="0 0 159 180"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M129.004 7.92862C117.494 2.64117 104.938 0 91.3309 0C78.7329 0 66.9706 2.35183 56.053 7.04781C45.1315 11.7489 35.5752 18.1683 27.3854 26.3072C19.193 34.4512 12.7231 43.972 7.98322 54.8795C3.23953 65.7922 0.867676 77.5386 0.867676 90.1262C0.867676 102.714 3.23953 114.464 7.98322 125.372C12.7231 136.284 19.193 145.764 27.3854 153.819C35.5752 161.874 45.1315 168.254 56.053 172.953C66.9706 177.651 78.7329 180 91.3309 180V150.294C82.928 150.294 75.0775 148.701 67.7693 145.511C60.4624 142.326 54.1201 138.043 48.7461 132.67C43.3683 127.301 39.0839 120.965 35.8942 113.663C32.702 106.365 31.1071 98.5188 31.1071 90.1262C31.1071 81.9057 32.702 74.1007 35.8942 66.7126C39.0839 59.3308 43.3683 52.9535 48.7461 47.5781C54.1201 42.2103 60.4624 37.9299 67.7693 34.7406C75.0775 31.5539 82.928 29.9567 91.3309 29.9567C100.401 29.9567 108.844 31.8062 116.654 35.4939C124.467 39.188 131.146 44.2256 136.688 50.6004L158.61 29.7055C150.38 20.4767 140.508 13.2161 129.004 7.92862Z"
+            />
+          </svg>
+        </div>
+        <div class="loader__letter">
+          <svg
+            width="123"
+            height="180"
+            viewBox="0 0 123 180"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M114.758 150.172H30.8351V101.055H79.342V71.4828H30.8351V28.7978H82.1632V0H0.0388184V180H122.459L114.758 150.172Z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <script>
+      const loader = document.querySelector(".loader");
+      const letters = document.querySelectorAll(".loader__letter");
+
+      let percentageCount = 0;
+      let oldPercentageGoal = 0;
+      let percentageGoal = 50;
+      let timeId;
+      let timeStamp;
+
+      document.addEventListener("DOMContentLoaded", () => {
+        oldPercentageGoal = 50;
+        percentageGoal = 75;
+      });
+
+      window.addEventListener("load", () => {
+        oldPercentageGoal = 75;
+        percentageGoal = 100;
+      });
+
+      function countProgress() {
+        if (percentageCount < oldPercentageGoal) {
+          if (percentageGoal == 100) {
+            percentageCount += 6;
+          } else {
+            percentageCount += 2;
+          }
+        } else if (percentageGoal == 100 && percentageCount >= 100) {
+        } else if (percentageGoal == 100 && percentageCount < 100) {
+          percentageCount += 8;
+        } else if (percentageCount >= percentageGoal - 1) {
+          percentageCount += 0.01;
+        } else if (percentageCount >= percentageGoal - 2) {
+          percentageCount += 0.1;
+        } else if (percentageCount >= percentageGoal - 5) {
+          percentageCount += 0.2;
+        } else if (percentageCount >= percentageGoal - 10) {
+          percentageCount += 0.4;
+        } else {
+          percentageCount += 1;
+        }
+
+        if (Math.round(percentageCount) >= 100 && percentageGoal == 100) {
+          percentageCount = 100;
+        }
+
+        percentageCount = Math.round(percentageCount * 100) / 100;
+
+        watchPercents(percentageCount);
+      }
+
+      timeId = setInterval(countProgress, 75);
+
+      function loaderEnd() {
+        loader.style.visibility = "hidden";
+        loader.style.opacity = "0";
+        loader.classList.add("loaded");
+        loader.addEventListener("transitionend", () => {
+          loader.style.display = "none";
+        });
+      }
+
+      function watchPercents(percents) {
+        let date = Date.now();
+
+        if (percents < 20) {
+          if (!timeStamp) {
+            timeStamp = Date.now();
+          }
+        } else if (percents >= 100 && date >= timeStamp + 2000) {
+          loaderEnd();
+          clearInterval(timeId);
+        } else if (percents >= 80 && date >= timeStamp + 1600) {
+          loader.style.background = "#402020";
+          letters[4].classList.add("active");
+        } else if (percents >= 60 && date >= timeStamp + 1200) {
+          loader.style.background = "#293630";
+          letters[3].classList.add("active");
+          letters.forEach((lett) => {
+            lett.querySelector("svg").style.fill = "#DCC5B7";
+          });
+        } else if (percents >= 40 && date >= timeStamp + 800) {
+          loader.style.background = "#5F656C";
+          letters[2].classList.add("active");
+        } else if (percents >= 20 && date >= timeStamp + 400) {
+          loader.style.background = "#AC7F66";
+          letters[1].classList.add("active");
+        }
+      }
+    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.

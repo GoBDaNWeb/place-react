@@ -17,7 +17,7 @@ export const Carousel: FC<PropsWithChildren> = ({ children }) => {
       direction="vertical"
       allowTouchMove={false}
       grabCursor={false}
-      speed={600}
+      speed={800}
       creativeEffect={{
         prev: {
           shadow: false,

@@ -1,9 +1,15 @@
-import { useSwiperSlide } from "swiper/react";
+import { observer } from "mobx-react-lite";
+
+import { useCarouselStore } from "entities/Carousel";
+
 import s from "./styles.module.sass";
+
 import { splitText } from "shared/lib";
-export const CoctailSubText = () => {
-  const slide = useSwiperSlide();
-  const activeClass = slide?.isActive || slide?.isPrev ? s.active : "";
+
+export const CoctailSubText = observer(() => {
+  const carousel = useCarouselStore();
+
+  const activeClass = carousel.activeIndex >= 7 ? s.active : "";
   const text =
     "Барная карта нашего заведения предлагает широкий выбор напитков для самых изысканных вкусов. От классических коктейлей до авторских напитков, каждый найдет что-то по своему вкусу.";
   return (
@@ -15,4 +21,4 @@ export const CoctailSubText = () => {
       ))}
     </p>
   );
-};
+});

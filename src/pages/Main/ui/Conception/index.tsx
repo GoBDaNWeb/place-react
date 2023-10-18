@@ -1,15 +1,16 @@
 import { useRef } from "react";
-
 import { useSwiper, useSwiperSlide } from "swiper/react";
 
 import s from "./styles.module.sass";
 
 import bg from "../../images/concept-bg.jpg";
 import { ArrowDownIcon, Button } from "shared/ui";
+import { useScroll } from "shared/lib";
 
 export const Conception = () => {
   const ref = useRef(null);
   const slide = useSwiperSlide();
+  const [titleRef] = useScroll();
 
   const swiper = useSwiper();
 
@@ -32,7 +33,9 @@ export const Conception = () => {
       </div>
       <div className={s.lineRight} />
       <span className={s.wordWrapper}>
-        <span className={s.word}>концепция</span>
+        <span ref={titleRef} className={s.word}>
+          концепция
+        </span>
       </span>
       <div className={s.btnWrapper}>
         <Button type="rounded" variable="primary" onClick={handleNextSection}>

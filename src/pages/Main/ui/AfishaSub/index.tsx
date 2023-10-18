@@ -1,27 +1,33 @@
-import { Swiper, SwiperSlide, useSwiper, useSwiperSlide } from "swiper/react";
+import { useState } from "react";
+import { observer } from "mobx-react-lite";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, Controller, Pagination } from "swiper/modules";
+
+import { useSwiperRef } from "shared/lib";
+
 import s from "./styles.module.sass";
 import "swiper/css";
 import "swiper/css/navigation";
+
 import afisha2 from "../../images/afisha2.jpg";
 import afisha3 from "../../images/afisha3.jpg";
-import { useRef, useState } from "react";
-import { ArrowLeftIcon, ArrowRightIcon, Button } from "shared/ui";
-import { useSwiperRef } from "shared/lib";
 
-export const AfishaSub = () => {
+import { ArrowLeftIcon, ArrowRightIcon, Button } from "shared/ui";
+import { useCarouselStore } from "entities/Carousel";
+import { afishaList } from "pages/Main/config";
+
+export const AfishaSub = observer(() => {
   const [swiperMain, setSwiperMain] = useState(null);
   const [swiperText, setSwiperText] = useState(null);
   const [pagination, paginationRef] = useSwiperRef();
 
-  const slide = useSwiperSlide();
-
-  const activeClass = slide?.isActive || slide?.isPrev ? s.active : "";
+  const carousel = useCarouselStore();
+  const activeClass = carousel.activeIndex >= 5 ? s.active : "";
 
   const afishaSubClass = `${s.section} ${activeClass}`;
 
   return (
-    <section className={afishaSubClass}>
+    <section id="afisha" className={afishaSubClass}>
       <div className={s.left}>
         <div className={s.top}></div>
         <div className={s.bottom}>
@@ -74,6 +80,7 @@ export const AfishaSub = () => {
                 disableOnInteraction: false,
               }}
               // controller={{ control: swiperText }}
+              normalizeSlideIndex
               pagination={{
                 //@ts-ignore
                 el: pagination,
@@ -82,13 +89,16 @@ export const AfishaSub = () => {
                 bulletActiveClass: "pagination-bullet-active",
                 clickable: true,
               }}
+              onSlideChange={(swiper) => {
+                //@ts-ignore
+                swiperText.slideTo(swiper.realIndex);
+              }}
             >
-              <SwiperSlide className={s.slide}>
-                <img src={afisha2} alt="afisha" />
-              </SwiperSlide>
-              <SwiperSlide className={s.slide}>
-                <img src={afisha3} alt="afisha" />
-              </SwiperSlide>
+              {afishaList.map((afisha) => (
+                <SwiperSlide key={afisha.id} className={s.slide}>
+                  <img src={afisha.image} alt="afisha" />
+                </SwiperSlide>
+              ))}
             </Swiper>
             <div
               ref={paginationRef}
@@ -104,9 +114,11 @@ export const AfishaSub = () => {
             onSwiper={(swiper) => setSwiperText(swiper)}
             speed={600}
             loop
+            spaceBetween={40}
             direction={"vertical"}
             allowTouchMove={false}
             grabCursor={false}
+            normalizeSlideIndex
             className={s.swiper}
             modules={[Autoplay, Controller]}
             autoplay={{
@@ -115,26 +127,18 @@ export const AfishaSub = () => {
             }}
             // controller={{ control: swiperMain }}
           >
-            <SwiperSlide className={s.slide}>
-              <div className={s.top}>
-                <span className={s.name}>Name</span>
-                <span className={s.time}>start 21:00</span>
-              </div>
-              <div className={s.bottom}>
-                <span className={s.date}>8</span>
-                <span className={s.month}>октября</span>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className={s.slide}>
-              <div className={s.top}>
-                <span className={s.name}>Come on</span>
-                <span className={s.time}>start 21:00</span>
-              </div>
-              <div className={s.bottom}>
-                <span className={s.date}>8</span>
-                <span className={s.month}>октября</span>
-              </div>
-            </SwiperSlide>
+            {afishaList.map((afisha) => (
+              <SwiperSlide key={afisha.id} className={s.slide}>
+                <div className={s.top}>
+                  <span className={s.name}>{afisha.title}</span>
+                  <span className={s.time}>страт {afisha.start}</span>
+                </div>
+                <div className={s.bottom}>
+                  <span className={s.date}>{afisha.date}</span>
+                  <span className={s.month}>{afisha.month}</span>
+                </div>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
         <div className={s.text}>
@@ -143,11 +147,11 @@ export const AfishaSub = () => {
             <span className={s.value}>г. Сочи, ул. Войковская, д.3</span>
           </div>
           <div className={s.row}>
-            <span className={s.label}>To reserve:</span>
+            <span className={s.label}>Зарезервировать:</span>
             <span className={s.value}>+7 (900) 003-90-44</span>
           </div>
         </div>
       </div>
     </section>
   );
-};
+});

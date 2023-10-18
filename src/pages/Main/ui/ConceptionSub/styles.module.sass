@@ -10,6 +10,9 @@
             &:nth-child(2)
                 .word
                     transition-delay: 1000ms
+            &:nth-child(3)
+                .word
+                    transition-delay: 1200ms
             .word
                 opacity: 1
                 transform: translateY(0)
@@ -26,8 +29,12 @@
         top: 8.5rem
         right: var(--container)
         width: 425px
+        @media(max-width: 1455px)
+            width: 325px
+        @media(max-width: 1160px)
+            width: 280px
         .wordWrapper
-            height: 40px
+            height: fit-content
             overflow: hidden
             position: relative
             .word
@@ -36,7 +43,6 @@
                 opacity: 0
                 transform-origin: bottom
                 display: inline-block
-
                 font-family: Cera Pro
                 font-size: 40px
                 font-style: normal
@@ -44,6 +50,9 @@
                 line-height: 100% 
                 letter-spacing: -2px
                 color: var(--text-primary-color)
-   
+                @media(max-width: 1455px)
+                    font-size: 36px
+                @media(max-width: 1160px)
+                    font-size: 28px
            
                     

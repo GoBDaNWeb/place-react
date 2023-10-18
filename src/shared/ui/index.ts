@@ -15,3 +15,5 @@ export * from "./ArrowRightIcon";
 export * from "./PlusIcon";
 export * from "./ArrowTopIcon";
 export * from "./CloseIcon";
+export * from "./Loader";
+export * from "./VkIcon";

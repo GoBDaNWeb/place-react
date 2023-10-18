@@ -12,6 +12,10 @@
     justify-content: flex-start
     flex-wrap: wrap
     max-width: 425px
+    @media(max-width: 1455px)
+        width: 325px
+    @media(max-width: 1160px)
+        width: 280px
     .wordWrapper
         overflow: hidden
         position: relative
@@ -27,3 +31,7 @@
             transform: translateY(120%)
             display: inline-block
             transition: var(--trs-700) 0ms
+            @media(max-width: 1455px)
+                font-size: 14px
+            @media(max-width: 1160px)
+                font-size: 12px

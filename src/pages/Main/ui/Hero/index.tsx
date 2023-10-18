@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useSwiper, useSwiperSlide } from "swiper/react";
 import { useInView } from "framer-motion";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-import { useChangeColor } from "shared/lib";
+import main1 from "shared/assets/images/main/main-1.jpg";
+import main2 from "shared/assets/images/main/main-2.jpg";
 
 import s from "./styles.module.sass";
-
 import { HeroLogo } from "../HeroLogo";
 import { HeroText } from "../HeroText";
 import { Button, ArrowDownIcon } from "shared/ui";
@@ -15,9 +16,9 @@ import { useCarouselStore } from "entities/Carousel";
 export const Hero = observer(() => {
   const [hoveredLeft, setHoveredLeft] = useState(false);
   const [hoveredRight, setHoveredRight] = useState(true);
-  const [delay, setDelay] = useState(2000);
+  const [delay, setDelay] = useState(100);
+  const [isLoad, setIsLoad] = useState(false);
 
-  const { bgColor } = useChangeColor();
   const swiper = useSwiper();
   const slide = useSwiperSlide();
 
@@ -25,7 +26,6 @@ export const Hero = observer(() => {
 
   const ref = useRef(null);
   const isInView = useInView(ref);
-  console.log("carousel", carousel.activeIndex);
 
   const handleHover = (part: "left" | "right") => {
     if (part === "left") {
@@ -40,26 +40,30 @@ export const Hero = observer(() => {
   const handleNextSection = () => swiper?.slideNext();
 
   useEffect(() => {
-    setTimeout(() => {
-      setDelay(0);
-    }, 2000);
+    // setTimeout(() => {
+    setDelay(0);
+    // }, 2000);
   }, []);
 
   useEffect(() => {
-    if (swiper) {
+    if (isLoad && swiper) {
       carousel.setSwiper(swiper);
       swiper.mousewheel?.disable();
       setTimeout(() => {
         swiper.mousewheel?.enable();
-      }, 2400);
+      }, 100);
     }
-  }, [swiper]);
+  }, [carousel, isLoad, swiper]);
 
   useEffect(() => {
     if (swiper) {
       carousel.setActiveIndex(swiper.activeIndex);
     }
   }, [carousel, swiper, swiper?.activeIndex]);
+
+  useEffect(() => {
+    setIsLoad(true);
+  }, []);
 
   const isViewClass = isInView ? s.isInView : "";
   const isActiveClass = slide?.isActive ? s.active : "";
@@ -71,23 +75,38 @@ export const Hero = observer(() => {
     hoveredRight ? s.active : ""
   } ${isViewClass}`;
 
-  const leftPartClass = `${s.leftPart} ${delay === 2000 ? s.disabled : ""}`;
-  const rightPartClass = `${s.rightPart} ${delay === 2000 ? s.disabled : ""}`;
+  const leftPartClass = `${s.leftPart} ${delay === 100 ? s.disabled : ""}`;
+  const rightPartClass = `${s.rightPart} ${delay === 100 ? s.disabled : ""}`;
 
   return (
     <section ref={ref} className={`${s.section} ${isActiveClass}`}>
       <HeroLogo />
-      <div style={{ background: bgColor }} className={s.backDrop} />
-
+      {/* <div style={{ background: bgColor }} className={s.backDrop} /> */}
       <div
         onMouseEnter={() => handleHover("left")}
         onClick={() => handleHover("left")}
         className={leftPartClass}
       >
-        <div
+        <img
+          src={main1}
           style={{ transitionDelay: `${delay}ms` }}
           className={leftImageWrapperClass}
+          alt="main"
+          // loading="lazy"
         />
+        {/* <LazyLoadImage
+          src={main1}
+          style={{ transitionDelay: `${delay}ms` }}
+          className={leftImageWrapperClass}
+          alt="main"
+          loading="lazy"
+          effect="blur"
+          placeholderSrc={main1}
+        /> */}
+        {/* <div
+          style={{ transitionDelay: `${delay}ms` }}
+          className={leftImageWrapperClass}
+        /> */}
         <HeroText />
       </div>
       <div
@@ -95,10 +114,26 @@ export const Hero = observer(() => {
         onClick={() => handleHover("right")}
         className={rightPartClass}
       >
-        <div
+        <img
+          src={main2}
           style={{ transitionDelay: `${delay}ms` }}
           className={rightImageWrapperClass}
+          alt="main"
+          // loading="lazy"
         />
+        {/* <LazyLoadImage
+          src={main2}
+          style={{ transitionDelay: `${delay}ms` }}
+          className={rightImageWrapperClass}
+          alt="main"
+          loading="lazy"
+          effect="blur"
+          placeholderSrc={main2}
+        /> */}
+        {/* <div
+          style={{ transitionDelay: `${delay}ms` }}
+          className={rightImageWrapperClass}
+        /> */}
       </div>
       <div className={s.btnWrapper}>
         <Button type="rounded" variable="primary" onClick={handleNextSection}>

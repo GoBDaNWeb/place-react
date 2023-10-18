@@ -1,20 +1,32 @@
-import { ArrowLeftIcon, ArrowRightIcon, Button } from "shared/ui";
-import s from "./styles.module.sass";
+import { useState } from "react";
+import { observer } from "mobx-react-lite";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, Pagination } from "swiper/modules";
+import { interiorList } from "pages/Main/config";
+
+import { useSwiperRef } from "shared/lib";
+
+import s from "./styles.module.sass";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { useState } from "react";
-import { interiorList } from "pages/Main/config";
-import { useSwiperRef } from "shared/lib";
 
-export const InteriorSub = () => {
-  const [swiper, setSwiper] = useState<any>(null);
+import { useCarouselStore } from "entities/Carousel";
+import { ArrowLeftIcon, ArrowRightIcon, Button } from "shared/ui";
+
+export const InteriorSub = observer(() => {
+  const [swiper, setSwiper] = useState(null);
   const [pagination, paginationRef] = useSwiperRef();
 
+  const carousel = useCarouselStore();
+
+  const sectionClass = `${s.section} ${
+    carousel.activeIndex >= 11 ? s.active : ""
+  }`;
+
   return (
-    <section className={s.section}>
+    <section id="interior" className={sectionClass}>
       <div className={s.content}>
         <div className={s.top}>
           <div className={s.info}>
@@ -31,7 +43,9 @@ export const InteriorSub = () => {
           </div>
         </div>
         <div className={s.bottom}>
-          <span className={s.title}>Интерьер</span>
+          <span className={s.title}>
+            <span className={s.word}>Интерьер</span>
+          </span>
           <div className={s.navigation}>
             <Button
               type="rounded"
@@ -88,4 +102,4 @@ export const InteriorSub = () => {
       </div>
     </section>
   );
-};
+});

@@ -1,38 +1,48 @@
+import int1 from "shared/assets/images/interior/int1.jpg";
+import int2 from "shared/assets/images/interior/int2.jpg";
+import int3 from "shared/assets/images/interior/int3.jpg";
+import int4 from "shared/assets/images/interior/int4.jpg";
+import int5 from "shared/assets/images/interior/int5.jpg";
+import int6 from "shared/assets/images/interior/int6.jpg";
+import int7 from "shared/assets/images/interior/int7.jpg";
+import int8 from "shared/assets/images/interior/int8.jpg";
+import int9 from "shared/assets/images/interior/int9.jpg";
+
 export const interiorList = [
   {
     id: 1,
-    img: "/images/interior/int1.jpg",
+    img: int1,
   },
   {
     id: 2,
-    img: "/images/interior/int2.jpg",
+    img: int2,
   },
   {
     id: 3,
-    img: "/images/interior/int3.jpg",
+    img: int3,
   },
   {
     id: 4,
-    img: "/images/interior/int4.jpg",
+    img: int4,
   },
   {
     id: 5,
-    img: "/images/interior/int5.jpg",
+    img: int5,
   },
   {
     id: 6,
-    img: "/images/interior/int6.jpg",
+    img: int6,
   },
   {
     id: 7,
-    img: "/images/interior/int7.jpg",
+    img: int7,
   },
   {
     id: 8,
-    img: "/images/interior/int8.jpg",
+    img: int8,
   },
   {
     id: 9,
-    img: "/images/interior/int9.jpg",
+    img: int9,
   },
 ];

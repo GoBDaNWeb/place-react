@@ -5,11 +5,11 @@
         opacity: 1
     .wordWrapper
         &::before
-            transition-delay: 500ms
+            transition-delay: 600ms
             opacity: 1
         .word
             transform: translateY(0)
-            transition-delay: 300ms
+            transition-delay: 400ms
 .section.small
     .lineLeft
         width: 28vw
@@ -42,13 +42,15 @@
     display: flex
     align-items: center
     justify-content: center
+    @media(max-width: $tab)
+        height: 50vh
     .btnWrapper
         position: absolute
         bottom: var(--container)
         right: var(--container)
         display: flex
         justify-content: center
-        transition: opacity var(--trs-500)
+        transition: opacity var(--trs-700)
         opacity: 0
     .lineLeft
         width: 0
@@ -56,7 +58,7 @@
         background: var(--soft-gray-color)
         position: absolute
         left: var(--container)
-        transition: width var(--trs-500)
+        transition: width var(--trs-700)
         @media(max-width: $tab)
             display: none
     .lineRight
@@ -65,7 +67,7 @@
         background: var(--soft-gray-color)
         position: absolute
         right: var(--container)
-        transition: width var(--trs-1000)
+        transition: width var(--trs-1200)
         @media(max-width: $tab)
             display: none
     .imageWrapper
@@ -73,7 +75,7 @@
         height: 100%
         position: relative
         top: 0
-        transition: all var(--trs-1000)
+        transition: all var(--trs-1200)
         &::after
             content: ''
             position: absolute
@@ -81,7 +83,7 @@
             width: 1px
             background: var(--soft-gray-color)
             right: -1.5rem
-            transition: var(--trs-1000) 500ms
+            transition: var(--trs-1200) 500ms
         &::before
             content: ''
             position: absolute
@@ -89,12 +91,12 @@
             width: 1px
             background: var(--soft-gray-color)
             left: -1.5rem
-            transition: var(--trs-1000) 500ms
+            transition: var(--trs-1200) 500ms
         img.active
             transform: scale(1)
         img
-            transition: all var(--trs-1000)
-            transform: scale(1.2)
+            transition: all var(--trs-1200)
+            transform: scale(1.3)
             width: 100%
             height: 100%
             position: absolute
@@ -141,10 +143,12 @@
             text-transform: uppercase
             transform: translateY(100%)
             transition: transform var(--trs-1000) 
+            white-space: nowrap
             @media(max-width: $tab)
                 transform: translateY(0)
-                width: 100%
+                // width: 100%
                 text-align: center
+                font-size: 62px
 
 
         

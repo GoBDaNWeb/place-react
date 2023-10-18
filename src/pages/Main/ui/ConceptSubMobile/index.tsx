@@ -4,11 +4,12 @@ import styles from "./styles.module.sass";
 
 export const ConceptSubMobile = () => {
   return (
-    <div className={`${styles.section} container `}>
+    <section id="concept" className={`${styles.section} container `}>
       <div className={styles.top}>
         <h5>
-          <span>Концептуальный </span>
-          <span>Cocktail Club Place</span>
+          <span>Коктейльный бар</span>
+          <span>с танцевальной музыкой</span>
+          <span>в центре Сочи</span>
         </h5>
       </div>
       <div className={styles.bottom}>
@@ -20,6 +21,6 @@ export const ConceptSubMobile = () => {
           <img src={bg} alt="section-2" loading="lazy" />
         </div>
       </div>
-    </div>
+    </section>
   );
 };

@@ -1,14 +1,18 @@
-import { useMenuStore } from "entities/Menu";
-import s from "./styles.module.sass";
-import "react-lazy-load-image-component/src/effects/blur.css";
-import { Button, InstagramIcon, TelegramIcon, WhatsAppIcon } from "shared/ui";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCreative } from "swiper/modules";
+
+import { useMenuStore } from "entities/Menu";
+import { menuList } from "../config";
+
+import s from "./styles.module.sass";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import "swiper/css";
 import "swiper/css/effect-creative";
-import { EffectCreative } from "swiper/modules";
-import { menuList } from "../config";
-import { useEffect, useState } from "react";
+
+import { Button, TelegramIcon, VkIcon, WhatsAppIcon } from "shared/ui";
+
 import { useCarouselStore } from "entities/Carousel";
 
 export const Menu = observer(() => {
@@ -19,10 +23,19 @@ export const Menu = observer(() => {
   const isOpen = menu.menuIsOpen ? s.open : "";
   const menuClass = `${s.menu} ${isOpen}`;
 
-  const handleSelectMenu = (index) => {
+  const handleSelectMenu = (index, section) => {
+    if (carousel.swiper) {
+      //@ts-ignore
+      carousel.swiper?.slideTo(index);
+    } else {
+      const sectionRef = document.querySelector(section);
+      window.scrollTo({
+        top: sectionRef.offsetTop,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
     menu.handleOpenMenu();
-    //@ts-ignore
-    carousel.swiper?.slideTo(index);
   };
 
   useEffect(() => {
@@ -65,7 +78,7 @@ export const Menu = observer(() => {
         <div className={s.menuList}>
           {menuList.map((menu, index) => (
             <span
-              onClick={() => handleSelectMenu(menu.slideTo)}
+              onClick={() => handleSelectMenu(menu.slideTo, menu.scroll)}
               onMouseEnter={() => setActiveIndex(index)}
               key={index}
             >
@@ -75,20 +88,40 @@ export const Menu = observer(() => {
         </div>
 
         <div className={s.btns}>
-          <Button variable="secondaryInvarion" className={s.btn}>
+          <Button
+            link="https://api.whatsapp.com/send/?phone=79000039044&text&type=phone_number&app_absent=0"
+            variable="secondaryInvarion"
+            className={s.btn}
+          >
             Бронировать
           </Button>
-          <Button variable="secondaryInvarion" className={s.btn}>
+          <Button
+            link="tel:+7 (900) 003-90-44"
+            variable="secondaryInvarion"
+            className={s.btn}
+          >
             +7 (900) 003-90-44
           </Button>
           <div className={s.socialBtns}>
-            <Button type="rounded" variable="secondaryInvarion">
-              <InstagramIcon />
+            <Button
+              link="https://vk.com/place.sochi"
+              type="rounded"
+              variable="secondaryInvarion"
+            >
+              <VkIcon />
             </Button>
-            <Button type="rounded" variable="secondaryInvarion">
+            <Button
+              link="https://t.me/+79000039044"
+              type="rounded"
+              variable="secondaryInvarion"
+            >
               <TelegramIcon />
             </Button>
-            <Button type="rounded" variable="secondaryInvarion">
+            <Button
+              link="https://api.whatsapp.com/send/?phone=79000039044&text&type=phone_number&app_absent=0"
+              type="rounded"
+              variable="secondaryInvarion"
+            >
               <WhatsAppIcon />
             </Button>
           </div>

@@ -1,5 +1,21 @@
 @import 'shared/styles/vars'
     
+.section.active
+    .content
+        .top
+            .info
+                transform: translateY(0)
+                opacity: 1
+        .bottom
+            .title
+                .word
+                    opacity: 1
+                    transform: translateY(0)
+    .swiperWrapper
+        opacity: 1
+        transform: scale(1)
+        img
+            transform: scale(1)
 .section
     height: 100vh
     background: var(--surface-quaternary-color)
@@ -25,16 +41,24 @@
             position: absolute
             left: 1rem
             right: 1rem
-            top: 0
-            bottom: 0
+            top: 1rem
+            bottom: 1rem
+            box-sizing: border-box
         .top
             display: grid
             grid-template-columns: repeat(3,1fr)
-            @media(max-width: $tab)
+            
             .info
                 display: flex
                 flex-direction: column
                 align-items: flex-start
+                overflow: hidden
+                transform: translateY(-30%)
+                opacity: 0
+                transition: var(--trs-1200) 300ms
+                @media(max-width: $tab)
+                    opacity: 1
+                    transform: translateY(0)
                 .value
                     font-family: Cera Pro, sans-serif
                     font-size: 64px
@@ -51,6 +75,8 @@
                     line-height: 100%
                     letter-spacing: -0.7px 
                     color: var(--text-secondary-color)
+                    display: inline-block
+                    
         .bottom
             display: flex
             align-items: flex-end
@@ -59,7 +85,7 @@
             @media(max-width: $tab)
                 border-top: none
                 position: absolute
-                bottom: 1rem
+                bottom: 2rem
 
             .title
                 top: 48px
@@ -72,6 +98,13 @@
                 line-height: 100%
                 letter-spacing: -2px 
                 color: var(--text-secondary-color)
+                text-transform: uppercase
+                overflow: hidden
+                .word
+                    display: inline-block
+                    opacity: 0
+                    transition: var(--trs-1200) 300ms 
+                    transform: translateY(50%)
                 @media(max-width: $tab)
                     display: none
             .navigation
@@ -85,11 +118,16 @@
         position: relative
         padding:  0 24px 24px
         box-sizing: border-box
+        opacity: 0
+        transform: scale(.9)
+        transition: var(--trs-1000) 300ms
         @media(max-width: $tab)
             width: 100%
             padding: 0
             padding-bottom: 1rem
             margin: 5rem 0
+            opacity: 1
+            transform: scale(1)
         .swiper
             width: 100%
             height: 100%
@@ -99,6 +137,10 @@
             height: 100%
             width: 100%
             object-fit: cover
+            transform: scale(1.9)
+            transition: var(--trs-1200) 300ms
+            @media(max-width: $tab)
+                transform: scale(1)
         .btn
             position: absolute
             top: 0

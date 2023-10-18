@@ -32,7 +32,7 @@ export const Main = () => {
       setTimeout(() => {
         document.body.classList.remove("noScroll");
         document.body.classList.add("noScrollDisable");
-      }, 2400);
+      }, 100);
     }
     if (width > 1024) {
       document.body.classList.remove("noScrollDisable");

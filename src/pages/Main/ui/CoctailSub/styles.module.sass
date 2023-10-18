@@ -1,5 +1,25 @@
 @import 'shared/styles/vars'
     
+.section.active
+    .content
+        .top
+            .title
+                .wordWrapper
+                    .word
+                        opacity: 1
+                        transform: translateY(0)
+                        &:nth-child(1)
+                            transition-delay: 300ms
+                        &:nth-child(2)
+                            transition-delay: 500ms
+        .bottom
+            .title
+                .word
+                    transform: translate(0)
+    .coctail
+        img
+            transform: scale(1)
+            opacity: 1
 .section
     height: 100vh
     background: var(--surface-quaternary-color)
@@ -14,6 +34,7 @@
         display: flex
         flex-direction: column
         padding: 1.5rem 1rem
+        height: fit-content
     .content
         z-index: 2
         display: grid
@@ -25,6 +46,7 @@
             justify-content: space-between
             padding-bottom: 1.5rem
             .title
+                margin: 0
                 font-family: Cera Pro, sans-serif
                 font-size: 40px
                 font-style: normal
@@ -32,6 +54,20 @@
                 line-height: 100%
                 letter-spacing: -2px 
                 color: var(--text-secondary-color)
+                .wordWrapper
+                    height: 45px
+                    overflow: hidden
+                    display: block
+                    position: relative
+                    .word
+                        display: inline-block
+                        transform: translateY(100%)
+                        opacity: 0
+                        transition: var(--trs-1200)
+                        @media(max-width: $tab)
+                            opacity: 1
+                            transform: translateY(0)
+
             p
                 color: var(--text-secondary-color)
                 font-family: Cera Pro, sans-serif
@@ -46,22 +82,31 @@
             border-top: 1px solid rgba(64, 32, 32, 0.20)
             position: relative
             .title
-                text-transform: uppercase
-                top: 48px
                 position: absolute
-                white-space: nowrap
-                font-family: Cera Pro, sans-serif
-                font-size: 96px
-                font-style: normal
-                font-weight: 400
-                line-height: 100%
-                letter-spacing: -2px 
-                color: var(--text-secondary-color)
+                overflow: hidden
+                top: 48px
                 @media(max-width: $tab)
                     display: none
+                .word
+                    display: inline-block
+                    text-transform: uppercase
+                    
+                    white-space: nowrap
+                    font-family: Cera Pro, sans-serif
+                    font-size: 96px
+                    font-style: normal
+                    font-weight: 400
+                    line-height: 100%
+                    letter-spacing: -2px 
+                    color: var(--text-secondary-color)
+                    transform: translateY(100%)
+                    transition: var(--trs-1200) 300ms
+                    
+
             .btn
                 height: 54px
                 width: 100%
+                padding: 0
            
     .coctail
         background-image: url('../../images/barmanBg.jpg')
@@ -74,9 +119,16 @@
         position: relative
         @media(max-width: $tab)
             width: 100%
+            min-height: 400px
             margin-top: 1rem
         img
+            transform: scale(.1)
             position: absolute
             height: 100%
             clip-path: ellipse(40% 45% at 50% 50%)
             cursor: pointer
+            transition: var(--trs-1200) 300ms
+            opacity: 0
+            @media(max-width: $tab)
+                transform: scale(1) 
+                opacity: 1

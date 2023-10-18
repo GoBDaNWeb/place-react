@@ -1,7 +1,8 @@
+@import 'shared/styles/vars'
+
 .sectionThreeText.active
     .wordWrapper
         .word
-            transition-delay: 600ms
             opacity: 1
             transform: translateY(0)
 .sectionThreeText
@@ -24,4 +25,7 @@
             letter-spacing: -0.8px
             transform: translateY(120%)
             display: inline-block
-            transition: var(--trs-700) 0ms
+            transition: var(--trs-1200) 400ms
+            @media(max-width: $tab)
+                transform: translateY(0)
+                opacity: 1

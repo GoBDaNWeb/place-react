@@ -1,37 +1,29 @@
+import { useState } from "react";
 import { observer } from "mobx-react-lite";
-import s from "./styles.module.sass";
-import { useModalStore } from "entities/Modal";
-import { ArrowLeftIcon, ArrowRightIcon, Button, CloseIcon } from "shared/ui";
-import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Controller } from "swiper/modules";
+import { Navigation, Controller, Pagination, Autoplay } from "swiper/modules";
+
+import { useSwiperRef } from "shared/lib";
+
+import s from "./styles.module.sass";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import food from "shared/assets/food1.jpg";
+import { useModalStore } from "entities/Modal";
+import { ArrowLeftIcon, ArrowRightIcon, Button, CloseIcon } from "shared/ui";
+
 import { foodList } from "../config";
 
 export const FoodModal = observer(() => {
-  const [navigation, setNavigation] = useState({});
   const [activeIndex, setActiveIndex] = useState(0);
   const [imageSwiper, setImageSwiper] = useState(null);
   const [textSwiper, setTextSwiper] = useState(null);
-  const navigationPrevRef = useRef<HTMLButtonElement>(null);
-  const navigationNextRef = useRef<HTMLButtonElement>(null);
+  const [pagination, paginationRef] = useSwiperRef();
+
   const modal = useModalStore();
 
   const isOpen = modal.foodModalOpen ? s.open : "";
   const modalClass = `${s.modalWrapper} ${isOpen}`;
-  console.log(foodList);
-
-  useEffect(() => {
-    if (imageSwiper) {
-      setNavigation({
-        prevEl: navigationPrevRef.current,
-        nextEl: navigationNextRef.current,
-      });
-    }
-  }, [imageSwiper]);
 
   return (
     <div className={modalClass}>
@@ -58,10 +50,17 @@ export const FoodModal = observer(() => {
               speed={600}
               controller={{ control: imageSwiper }}
             >
-              {foodList.map((food, index) => (
+              {foodList.map((food) => (
                 <SwiperSlide key={food.id} className={s.swiperItem}>
                   <span className={s.title}>{food.title}</span>
-                  <p className={s.description}>{food.text}</p>
+                  <div className={s.textWrapper}>
+                    {food.text ? (
+                      <p className={s.description}>{food.text}</p>
+                    ) : null}
+                    {food.textEng ? (
+                      <p className={s.description}>{food.textEng}</p>
+                    ) : null}
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -96,13 +95,25 @@ export const FoodModal = observer(() => {
           <Swiper
             //@ts-ignore
             onSwiper={(swiper) => setImageSwiper(swiper)}
-            modules={[Navigation, Controller]}
+            modules={[Navigation, Controller, Pagination, Autoplay]}
             className={`${s.swiper} fade-swiper`}
             onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
             allowTouchMove={false}
             grabCursor={false}
             speed={600}
             controller={{ control: textSwiper }}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              //@ts-ignore
+              el: pagination,
+              type: "bullets",
+              bulletClass: "pagination-bullet",
+              bulletActiveClass: "pagination-bullet-active",
+              clickable: true,
+            }}
           >
             {foodList.map((food, index) => (
               <SwiperSlide key={food.id}>
@@ -110,6 +121,10 @@ export const FoodModal = observer(() => {
               </SwiperSlide>
             ))}
           </Swiper>
+          <div
+            ref={paginationRef}
+            className={`pagination pagination-secondary  ${s.pagination}`}
+          ></div>
         </div>
       </div>
     </div>

@@ -1,19 +1,24 @@
-import { observer } from "mobx-react-lite";
-import s from "./styles.module.sass";
-import { useModalStore } from "entities/Modal";
-import { ArrowLeftIcon, ArrowRightIcon, Button, CloseIcon } from "shared/ui";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Controller } from "swiper/modules";
+import { Navigation, Controller, Pagination, Autoplay } from "swiper/modules";
+import { observer } from "mobx-react-lite";
+
+import { coctailList } from "../config";
+import { useSwiperRef } from "shared/lib";
+
+import s from "./styles.module.sass";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import coctail from "shared/assets/coctail1.jpg";
-import { coctailList } from "../config";
+import { useModalStore } from "entities/Modal";
+import { ArrowLeftIcon, ArrowRightIcon, Button, CloseIcon } from "shared/ui";
+
 export const CoctailModal = observer(() => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [imageSwiper, setImageSwiper] = useState(null);
   const [textSwiper, setTextSwiper] = useState(null);
+  const [pagination, paginationRef] = useSwiperRef();
+
   const modal = useModalStore();
 
   const isOpen = modal.coctailModalOpen ? s.open : "";
@@ -81,13 +86,25 @@ export const CoctailModal = observer(() => {
           <Swiper
             //@ts-ignore
             onSwiper={(swiper) => setImageSwiper(swiper)}
-            modules={[Navigation, Controller]}
+            modules={[Navigation, Controller, Autoplay, Pagination]}
             className={`${s.swiper} fade-swiper`}
             onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
             allowTouchMove={false}
             grabCursor={false}
             speed={600}
             controller={{ control: textSwiper }}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              //@ts-ignore
+              el: pagination,
+              type: "bullets",
+              bulletClass: "pagination-bullet",
+              bulletActiveClass: "pagination-bullet-active",
+              clickable: true,
+            }}
           >
             {coctailList.map((coctail, index) => (
               <SwiperSlide key={index}>
@@ -95,6 +112,10 @@ export const CoctailModal = observer(() => {
               </SwiperSlide>
             ))}
           </Swiper>
+          <div
+            ref={paginationRef}
+            className={`pagination ${s.pagination}`}
+          ></div>
         </div>
       </div>
     </div>

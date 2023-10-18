@@ -33,6 +33,7 @@
         bottom: 240px
         .word
             transform: translateY(0)
+            @media(max-width: $tab)
 
 .section
     background: var(--surface-secondary-color)
@@ -43,6 +44,8 @@
     display: flex
     align-items: center
     justify-content: center
+    @media(max-width: $tab)
+        height: 50vh
     .btnWrapper
         position: absolute
         bottom: var(--container)
@@ -144,8 +147,8 @@
             transition: transform var(--trs-1000) 
             @media(max-width: $tab)
                 transform: translateY(0)
-                width: 100%
                 text-align: center
+                font-size: 62px
 
 
         

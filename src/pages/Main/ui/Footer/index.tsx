@@ -1,8 +1,8 @@
 import {
   ArrowTopIcon,
   Button,
-  InstagramIcon,
   TelegramIcon,
+  VkIcon,
   WhatsAppIcon,
 } from "shared/ui";
 import s from "./styles.module.sass";
@@ -12,7 +12,7 @@ export const Footer = () => {
   const swiper = useSwiper();
 
   return (
-    <section className={s.section}>
+    <section id="contacts" className={s.section}>
       <div className={s.top}>
         <div className={s.animRow}>
           {[...Array(100)].map((_, index) => (
@@ -36,13 +36,25 @@ export const Footer = () => {
         <div className={s.right}>
           <div className={s.top}>
             <div className={s.social}>
-              <Button type="rounded" variable="secondaryInvarion">
-                <InstagramIcon />
+              <Button
+                link="https://vk.com/place.sochi"
+                type="rounded"
+                variable="secondaryInvarion"
+              >
+                <VkIcon />
               </Button>
-              <Button type="rounded" variable="secondaryInvarion">
+              <Button
+                link="https://t.me/+79000039044"
+                type="rounded"
+                variable="secondaryInvarion"
+              >
                 <TelegramIcon />
               </Button>
-              <Button type="rounded" variable="secondaryInvarion">
+              <Button
+                link="https://api.whatsapp.com/send/?phone=79000039044&text&type=phone_number&app_absent=0"
+                type="rounded"
+                variable="secondaryInvarion"
+              >
                 <WhatsAppIcon />
               </Button>
             </div>
